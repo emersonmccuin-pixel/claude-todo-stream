@@ -17,6 +17,19 @@ export function activate(context: vscode.ExtensionContext) {
   });
   context.subscriptions.push(treeView);
 
+  // Expand the view on startup
+  treeView.onDidChangeVisibility((e) => {
+    if (e.visible) {
+      // Focus the view to ensure it's expanded
+      vscode.commands.executeCommand('claudeTodoStream.focus');
+    }
+  });
+
+  // Also try to expand on activation
+  setTimeout(() => {
+    vscode.commands.executeCommand('claudeTodoStream.focus');
+  }, 500);
+
   // Register refresh command
   const refreshCommand = vscode.commands.registerCommand('claudeTodoStream.refresh', () => {
     todoProvider.refresh();
