@@ -1,0 +1,54 @@
+{
+  "name": "claude-todo-stream",
+  "displayName": "Claude Code TODO Stream",
+  "description": "Display Claude Code's task list in the VS Code sidebar",
+  "version": "0.0.1",
+  "publisher": "emerson",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:claudeTodoStream"
+  ],
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "claudeTodoStream",
+          "name": "Claude TODO Stream"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "claudeTodoStream.refresh",
+        "title": "Refresh TODO Stream",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "claudeTodoStream.refresh",
+          "when": "view == claudeTodoStream",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
